@@ -1,0 +1,72 @@
+
+/* ------------------------------------ */
+/*                                      */
+/* BEGIN: rounded box                   */
+/*                                      */
+/* ------------------------------------ */
+
+.mytop 
+{ 
+    width: 400px; 
+    background: url(images/btop3.jpg) no-repeat; 
+}
+
+.mycontent 
+{
+    width: 400px; 
+    background: url(images/bcontent3.jpg) repeat; 
+}
+
+.mycontent div 
+{ 
+    padding-left: 18px; 
+    padding-right: 22px; 
+    text-align: justify; 
+}
+
+.mybot 
+{ 
+    width: 400px; 
+    background: url(images/bbot3.jpg) no-repeat; 
+}
+
+/* ------------------------------------ */
+
+.rc_maintext {
+    font-family: "Trebuchet MS", Verdana, Arial;
+    font-size: 10pt;
+    font-weight: normal;
+    color: #404040;
+}
+
+.rc_small_font { 
+    font-family:  Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+
+a.rc_link         { text-decoration: none; color: #cd2222; }
+a.rc_link:hover   { text-decoration: underline; color: #008b8b; }
+
+
+.rc_input
+{
+    color: #000000;
+    background: #f0f0f0; /*#f6f6f6; */
+    border: 1px solid #30b9f3;
+    font-size: 12px;
+    vertical-align: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.rc_radio
+{
+    color: #000000;
+    background: #ffffff;
+    border: 0px solid #ffffff; /*30b9f3; */
+    font-size: 12px;
+    vertical-align: -1px;
+}
+
