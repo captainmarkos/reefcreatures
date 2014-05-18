@@ -4,54 +4,56 @@
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="description" content="Reef Creature Quiz" />
-<meta name="keywords" content="dive log, free dive log, free online diver logbook, free diver logbook" />
+<meta name="keywords" content="free creatures quiz" />
 <title>Blue Wild - Reef Creature Quiz</title>
-<link type="text/css" rel="stylesheet" href="javascript/jquery-ui-1.8.21.custom/css/custom-theme/jquery-ui-1.8.21.custom.css" />
 <script type="text/javascript" src="javascript/jquery-ui-1.8.21.custom/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="javascript/jquery-ui-1.8.21.custom/js/jquery-ui-1.8.21.custom.min.js"></script>
+<link type="text/css" rel="stylesheet" href="javascript/jquery-ui-1.8.21.custom/css/custom-theme/jquery-ui-1.8.21.custom.css" />
 
 <?php
-    print "<script type=\"text/javascript\">\n\n";
-    $fh = fopen("images/reefcreatures_data.csv", "r");
+    // NOTE: Here we read in the CSV data file and shuffle the fish quiz records.
+    // Then output some javascript that will preload 20 ramdomly selected creature
+    // images.
+    echo "<script type=\"text/javascript\">\n\n";
+    $fh = fopen("images/reef_data/reefcreatures_data.csv", "r");
     if($fh) {
-        print "var image = Array();\n";
-        print "var question = Array();\n";
-        print "var answer_a = Array();\n";
-        print "var answer_b = Array();\n";
-        print "var answer_c = Array();\n";
-        print "var answer_d = Array();\n";
-        print "var correct_answer = Array();\n";
-        print "var base_url       = \"images/\";\n\n";
+        echo "var image = Array();\n";
+        echo "var question = Array();\n";
+        echo "var answer_a = Array();\n";
+        echo "var answer_b = Array();\n";
+        echo "var answer_c = Array();\n";
+        echo "var answer_d = Array();\n";
+        echo "var correct_answer = Array();\n";
+        echo "var base_url       = 'images/reef_images/';" . "\n\n";
         $tmparray = array();
 
-        while(($data = fgets($fh, 4096)) != false)
-        {
+        while(($data = fgets($fh, 4096)) != false) {
             array_push($tmparray, $data);
         }
         shuffle($tmparray);
 
         $i = 0;
-        $MAX_QUESTIONS = 20;  // count($tmparray);
+        $MAX_QUESTIONS = 20;
 
         for($j = 0; $j < $MAX_QUESTIONS; $j++)
         {
-            $row = preg_split("/,/", $tmparray[$j]);
-            if(strcasecmp(trim($row[0]), "image_name") == 0) { $MAX_QUESTIONS++; continue; }
-            print "image[$i]             = base_url + \"" . trim($row[0]) . "\";\n";
-            print "question[$i]          = \"" . trim($row[1]) . "\";\n";
-            print "answer_a[$i]          = \"" . trim($row[2]) . "\";\n";
-            print "answer_b[$i]          = \"" . trim($row[3]) . "\";\n";
-            print "answer_c[$i]          = \"" . trim($row[4]) . "\";\n";
-            print "answer_d[$i]          = \"" . trim($row[5]) . "\";\n";
-            print "correct_answer[$i]    = \"" . trim($row[6]) . "\";\n";
+            $row = preg_split('/,/', $tmparray[$j]);
+            if(strcasecmp(trim($row[0]), 'image_name') == 0) { $MAX_QUESTIONS++; continue; }
+            echo "image[$i]             = base_url + '" . trim($row[0]) . "';\n";
+            echo "question[$i]          = '" . trim($row[1]) . "';\n";
+            echo "answer_a[$i]          = '" . trim($row[2]) . "';\n";
+            echo "answer_b[$i]          = '" . trim($row[3]) . "';\n";
+            echo "answer_c[$i]          = '" . trim($row[4]) . "';\n";
+            echo "answer_d[$i]          = '" . trim($row[5]) . "';\n";
+            echo "correct_answer[$i]    = '" . trim($row[6]) . "';\n";
 
-            print "var preload_images" . $i . "  = new Image(300, 225);\n";
-	    print "preload_images" . $i . ".src  = base_url + \"" . trim($row[0]) . "\";\n\n";
+            echo "var preload_images" . $i . "  = new Image(300, 225);\n";
+	    echo "preload_images" . $i . ".src  = base_url + '" . trim($row[0]) . "';\n\n";
             $i++;
 	}
     }
@@ -65,8 +67,48 @@ var index = 0;
 var right_answers = 0;
 var total_questions = 0;
 
-function runQuiz()
-{
+function runQuiz() {
+    total_questions = image.length;
+    if(index >= total_questions)
+    {
+        right_answers = 0; 
+        index = 0; 
+    }
+
+    var score  = '<div id="main-rc-score">';
+        score += '<div id="correct-rc-score">' + right_answers + ' correct of '+ total_questions + '</div>';
+
+    var i = index;
+
+    var str = "<form action=\"#\" method=\"post\" id=\"myform\" name=\"myform\">";
+        str += "<center>";
+        str += "<img src=\"" + image[i] + "\" width=\"300\" height=\"225\" border=\"1\" />";
+        str += "</center><br />";
+        str += "<font style=\"color: #000000; font-family: Arial, Tahoma, Verdana; font-size: 14px;\">";
+        str += "<b>" + (index +1) + ".</b>&nbsp;&nbsp;" + question[i] + "<br /><br />";
+
+        str += "<input class=\"rc_radio\" type=\"radio\" value=\"a\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('a', '" + correct_answer[i] + "');\" />";
+        str += "&nbsp;A)&nbsp; <span id=\"a_a\">" + answer_a[i] + "</span><br />";
+
+        str += "<input class=\"rc_radio\" type=\"radio\" value=\"b\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('b', '" + correct_answer[i] + "');\" />";
+        str += "&nbsp;B)&nbsp; <span id=\"a_b\">" + answer_b[i] + "</span><br />";
+
+        str += "<input class=\"rc_radio\" type=\"radio\" value=\"c\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('c', '" + correct_answer[i] + "');\" />";
+        str += "&nbsp;C)&nbsp; <span id=\"a_c\">" + answer_c[i] + "</span><br />";
+
+        str += "<input class=\"rc_radio\" type=\"radio\" value=\"d\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('d', '" + correct_answer[i] + "');\" />";
+        str += "&nbsp;D)&nbsp; <span id=\"a_d\">" + answer_d[i] + "</span><br />";
+
+        str += "</font><br />";
+        str += "</form>";
+
+    document.getElementById('fishquiz').innerHTML = str;
+    document.getElementById('fishquiz_answers').innerHTML = score;
+
+    index++;
+}
+
+function runQuiz2() {
     total_questions = image.length;
     if(index >= total_questions)
     {
@@ -107,7 +149,6 @@ function runQuiz()
 
     index++;
 }
-
 
 function checkAnswer(user_answer, the_answer)
 {
@@ -153,13 +194,12 @@ function checkAnswer(user_answer, the_answer)
 
 </script>
 
-<link rel="stylesheet" type="text/css" href="reefcreatures.css" />
-<link rel="SHORTCUT ICON" href="favicon.ico" />
-<link rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css">
-<link href='http://fonts.googleapis.com/css?family=Raleway:700,500,400,300,200' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="../styles/bluewild.css">
-<link rel="stylesheet" href="../styles/bluewild-devices.css">
-<link rel="stylesheet" href="../styles/normalize.css">
+<link type="text/css" rel="stylesheet" type="text/css" href="reefcreatures.css" />
+<link type="text/css" rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css" />
+<link type="text/css" href="http://fonts.googleapis.com/css?family=Raleway:700,500,400,300,200" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="../styles/bluewild.css" />
+<link type="text/css" rel="stylesheet" href="../styles/bluewild-devices.css" />
+<link type="text/css" rel="stylesheet" href="../styles/normalize.css" />
 
 <script type="text/javascript">
 
@@ -196,29 +236,13 @@ function checkAnswer(user_answer, the_answer)
 
     <section>
         <div class="main-content">
-
-<!--                 -->
-<!-- BEGIN: fishquiz -->
-<!--                 -->
-
-<div class="mytop">&nbsp;</div>
-<div class="mycontent">
-    <div style="height: 462px;">
-        <center>
-            <font style="color: #cd0000; font-family: Comic Sans MS, Tahoma, Arial, sans-serif; font-size: 20px;"><b>Reef Creature &amp; Fish ID Quiz</b></font>
-            <br />
-        </center>
-        <br />
-        <div id="fishquiz"></div>
-        <div style="height: 34px;" id="fishquiz_answers"></div>
-    </div>
-</div>
-<div class="mybot">&nbsp;</div>
-
-<!--               -->
-<!-- END: fishquiz -->
-<!--               -->
-
+            <div class="row no-margin">
+                <div class="row-desc">
+                    <h4>Reef Creature &amp; Fish ID Quiz</h4>
+                    <div id="fishquiz"></div>
+                    <div id="fishquiz_answers"></div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
