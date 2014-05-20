@@ -11,9 +11,6 @@
 <meta name="description" content="Reef Creature Quiz" />
 <meta name="keywords" content="free creatures quiz" />
 <title>Blue Wild - Reef Creature Quiz</title>
-<script type="text/javascript" src="javascript/jquery-ui-1.8.21.custom/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="javascript/jquery-ui-1.8.21.custom/js/jquery-ui-1.8.21.custom.min.js"></script>
-<link type="text/css" rel="stylesheet" href="javascript/jquery-ui-1.8.21.custom/css/custom-theme/jquery-ui-1.8.21.custom.css" />
 
 <?php
     // NOTE: Here we read in the CSV data file and shuffle the fish quiz records.
@@ -40,8 +37,7 @@
         $i = 0;
         $MAX_QUESTIONS = 20;
 
-        for($j = 0; $j < $MAX_QUESTIONS; $j++)
-        {
+        for($j = 0; $j < $MAX_QUESTIONS; $j++) {
             $row = preg_split('/,/', $tmparray[$j]);
             if(strcasecmp(trim($row[0]), 'image_name') == 0) { $MAX_QUESTIONS++; continue; }
             echo "image[$i]             = base_url + '" . trim($row[0]) . "';\n";
@@ -69,8 +65,7 @@ var total_questions = 0;
 
 function runQuiz() {
     total_questions = image.length;
-    if(index >= total_questions)
-    {
+    if(index >= total_questions) {
         right_answers = 0; 
         index = 0; 
     }
@@ -80,14 +75,13 @@ function runQuiz() {
 
     var i = index;
 
-    var str = "<form action=\"#\" method=\"post\" id=\"myform\" name=\"myform\">";
-        str += "<center>";
-        str += "<img src=\"" + image[i] + "\" width=\"300\" height=\"225\" border=\"1\" />";
-        str += "</center><br />";
-        str += "<font style=\"color: #000000; font-family: Arial, Tahoma, Verdana; font-size: 14px;\">";
-        str += "<b>" + (index +1) + ".</b>&nbsp;&nbsp;" + question[i] + "<br /><br />";
+    var str  = '<center>';
+        str += '<img src="' + image[i] + '" width="300" height="225" border="1" />';
+        str += '</center><br />';
+        str += '<b>' + (index +1) + '.</b>&nbsp;&nbsp;' + question[i] + '<br /><br />';
 
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"a\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('a', '" + correct_answer[i] + "');\" />";
+        str += '<input class="rc_radio" type="radio" value="a" name="ans" id="ans" ';
+        str += "onclick=\"checkAnswer('a', '" + correct_answer[i] + "');\" />";
         str += "&nbsp;A)&nbsp; <span id=\"a_a\">" + answer_a[i] + "</span><br />";
 
         str += "<input class=\"rc_radio\" type=\"radio\" value=\"b\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('b', '" + correct_answer[i] + "');\" />";
@@ -99,8 +93,7 @@ function runQuiz() {
         str += "<input class=\"rc_radio\" type=\"radio\" value=\"d\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('d', '" + correct_answer[i] + "');\" />";
         str += "&nbsp;D)&nbsp; <span id=\"a_d\">" + answer_d[i] + "</span><br />";
 
-        str += "</font><br />";
-        str += "</form>";
+        str += '<br />';
 
     document.getElementById('fishquiz').innerHTML = str;
     document.getElementById('fishquiz_answers').innerHTML = score;
@@ -110,8 +103,7 @@ function runQuiz() {
 
 function runQuiz2() {
     total_questions = image.length;
-    if(index >= total_questions)
-    {
+    if(index >= total_questions) {
         right_answers = 0; 
         index = 0; 
     }
@@ -150,46 +142,47 @@ function runQuiz2() {
     index++;
 }
 
-function checkAnswer(user_answer, the_answer)
-{
-    var form = document.getElementById('myform');
-    var str = "<table width=\"100%\" border=\"0\"><tr style=\"height: 28px;\">";
-    if(user_answer.toLowerCase() == the_answer.toLowerCase())
-    {
+function checkAnswer(user_answer, the_answer) {
+  //var form = document.getElementById('myform');
+    var str = '<table width="100%" border="0"><tr style="height: 28px;">';
+    if(user_answer.toLowerCase() == the_answer.toLowerCase()) {
         // Correct answer
         // --------------
         right_answers++;
-        str += "<td align=\"left\">";
-        str += "<font style=\"color: #008000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;\">";
-        str += "Correct!&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += '<td align="left">';
+        str += '<font style="color: #008000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;">';
+        str += 'Correct!&nbsp;&nbsp;&nbsp;&nbsp;';
         if(index >= total_questions) { str += '<input class="rc_input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
         else                         { str += '<input class="rc_input" type="submit" value="Next" onclick="runQuiz();" />'; }
-        str += "</font></td>";
-        str += "<td align=\"right\">" + right_answers + " correct of " + total_questions + "</td></tr></table>";
+        str += '</font></td>';
+        str += '<td align="right">' + right_answers + ' correct of ' + total_questions + '</td></tr></table>';
         document.getElementById('fishquiz_answers').innerHTML = str;
     }
-    else
-    {
+    else {
         // Wrong answer
         // ------------
-        str += "<td align=\"left\">";
-        str += "<font style=\"color: #cd0000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;\">";
-        str += "Wrong&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += '<td align="left">';
+        str += '<font style="color: #cd0000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;">';
+        str += 'Wrong&nbsp;&nbsp;&nbsp;&nbsp;';
         if(index >= total_questions) { str += '<input class="rc_input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
         else                         { str += '<input class="rc_input" type="submit" value="Next" onclick="runQuiz();" />'; }
-        str += "</font></td>";
+        str += '</font></td>';
         str += "<td align=\"right\">" + right_answers + " correct of " + total_questions + "</td></tr></table>";
         document.getElementById('fishquiz_answers').innerHTML = str;
 
-        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').style.backgroundColor = "#ffff00"; }
-        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').style.backgroundColor = "#ffff00"; }
-        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').style.backgroundColor = "#ffff00"; }
-        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').style.backgroundColor = "#ffff00"; }
+        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').style.backgroundColor = "#00ff00"; }
+        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').style.backgroundColor = "#00ff00"; }
+        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').style.backgroundColor = "#00ff00"; }
+        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').style.backgroundColor = "#00ff00"; }
     }
-    form.ans[0].disabled = true;
-    form.ans[1].disabled = true;
-    form.ans[2].disabled = true;
-    form.ans[3].disabled = true; 
+
+    var answer = document.getElementsByClassName('rc_radio');
+    if(answer) {
+        answer[0].disabled = true;
+        answer[1].disabled = true;
+        answer[2].disabled = true;
+        answer[3].disabled = true;
+    }
 }
 
 </script>
