@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Reef Creature Quiz" />
 <meta name="keywords" content="free creatures quiz" />
 <title>Blue Wild - Reef Creature Quiz</title>
@@ -49,9 +49,9 @@
             echo "correct_answer[$i]    = '" . trim($row[6]) . "';\n";
 
             echo "var preload_images" . $i . "  = new Image(300, 225);\n";
-	    echo "preload_images" . $i . ".src  = base_url + '" . trim($row[0]) . "';\n\n";
+        echo "preload_images" . $i . ".src  = base_url + '" . trim($row[0]) . "';\n\n";
             $i++;
-	}
+    }
     }
     fclose($fh);
     echo '</script>';
@@ -191,7 +191,7 @@ function checkAnswer(user_answer, the_answer) {
 <link type="text/css" rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css" />
 <link type="text/css" href="http://fonts.googleapis.com/css?family=Raleway:700,500,400,300,200" rel="stylesheet" />
 <link type="text/css" rel="stylesheet" href="../styles/bluewild.css" />
-<link type="text/css" rel="stylesheet" href="../styles/bluewild-devices.css" />
+<link rel="stylesheet" href="../styles/foundation.css" />
 <link type="text/css" rel="stylesheet" href="../styles/normalize.css" />
 
 <script type="text/javascript">
@@ -203,41 +203,44 @@ function checkAnswer(user_answer, the_answer) {
 <body onload="runQuiz();">
 
 <header>
-    <div class="header-wrapper">
-      <h1 id="logo">dive the blue wild</h1>
-      <div class="contact-info">
-         <a href="tel:19542135067">
-            <i class="fa fa-phone"></i> : (954) 213-5067&nbsp;&nbsp;
-         </a>
-         <br class="rw-break" /> <a href="mailto:bluewildscuba@gmail.com" target="_blank">
-            <i class="fa fa-envelope"></i> : bluewildscuba@gmail.com
-         </a>
+   <div class="row offset-top">
+      <div class="small-12 medium-6 large-6 columns no-padding small-only-text-center">
+         <h3>dive the blue wild</h3>
       </div>
-    </div>
+      <div class="small-12 medium-6 large-6 columns contact-info small-only-text-center">
+         <a href="tel:19542135067"><i class="fa fa-phone"></i> : (954) 213-5067</a>&nbsp;&nbsp;
+         <a href="mailto:bluewildscuba@gmail.com" target="_blank">
+         <i class="fa fa-envelope"></i> : bluewildscuba@gmail.com</a>
+      </div>
+   </div>
 </header>
+<div class="row">
+   <nav class="breadcrumbs">
+      <a href="../"><i class="fa fa-home icon-font-size"></i></a>
+      <a href="../#/courses">Scuba Courses</a>
+      <a href="../#/aboutus">About Us</a>
+      <a class="hide-for-small-only"  href="../divelog/index.php">Dive Log</a>
+      <a class="selected">Reef Creature Quiz</a>
+   </nav>
+</div>
 
-<div class="main-wrapper">
-    <nav>
-      <ul>
-        <li><a href="../"><i class="fa fa-home icon-font-size"></i></a></li>
-        <li><a href="../#/courses">Scuba Courses</a></li>
-        <li><a href="../#/aboutus">About Us</a></li>
-        <li><a href="../divelog/index.php">Dive Log</a></li>
-        <li><a class="selected" href="reefcreatures/index.php">Reef Creature Quiz</a></li>
-      </ul>
-    </nav>
-
-    <section>
-        <div class="main-content">
-            <div class="row no-margin">
-                <div class="row-desc">
-                    <h4>Reef Creature &amp; Fish ID Quiz</h4>
-                    <div id="fishquiz"></div>
-                    <div id="fishquiz_answers"></div>
-                </div>
-            </div>
+<div class="row panel-margin">
+  <div class="large-12 columns no-padding">
+    <div class="panel">
+      <!--single row for info-->
+      <div class="panel">
+        <div class="row">
+          <div class="large-12 columns">
+            <h4>Reef Creature &amp; Fish ID Quiz</h4>
+            <div id="fishquiz"></div>
+            <div id="fishquiz_answers"></div>
+          </div>
         </div>
-    </section>
+      </div>
+      <!--end content-->
+    </div>
+  </div>
+</div>
 </div>
 </body>
 </html>
