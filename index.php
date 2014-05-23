@@ -49,13 +49,12 @@
             echo "correct_answer[$i]    = '" . trim($row[6]) . "';\n";
 
             echo "var preload_images" . $i . "  = new Image(300, 225);\n";
-        echo "preload_images" . $i . ".src  = base_url + '" . trim($row[0]) . "';\n\n";
+            echo "preload_images" . $i . ".src  = base_url + '" . trim($row[0]) . "';\n\n";
             $i++;
-    }
+        }
     }
     fclose($fh);
     echo '</script>';
-
 ?>
 
 <script type="text/javascript">
@@ -75,108 +74,72 @@ function runQuiz() {
 
     var i = index;
 
-    var str  = '<center>';
-        str += '<img src="' + image[i] + '" width="300" height="225" border="1" />';
-        str += '</center><br />';
+    var str  = '<img id="rc-img" src="' + image[i] + '" />';
         str += '<b>' + (index +1) + '.</b>&nbsp;&nbsp;' + question[i] + '<br /><br />';
 
-        str += '<input class="rc_radio" type="radio" value="a" name="ans" id="ans" ';
-        str += "onclick=\"checkAnswer('a', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;A)&nbsp; <span id=\"a_a\">" + answer_a[i] + "</span><br />";
+        str += '<div>';
+        str += '<input class="rc-radio" type="radio" value="a" name="ans" id="ans" onclick="checkAnswer(\'a\', \'' + correct_answer[i] + '\');" />';
+        str += '<div class="rc-letter">A.</div><div id="a_a" class="rc-answer-text">' + answer_a[i] + '</div>';
+        str += '</div>';
 
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"b\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('b', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;B)&nbsp; <span id=\"a_b\">" + answer_b[i] + "</span><br />";
+        str += '<div>';
+        str += '<input class="rc-radio" type="radio" value="b" name="ans" id="ans" onclick="checkAnswer(\'b\', \'' + correct_answer[i] + '\');" />';
+        str += '<div class="rc-letter">B.</div><div id="a_b" class="rc-answer-text">' + answer_b[i] + '</div>';
+        str += '</div>';
 
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"c\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('c', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;C)&nbsp; <span id=\"a_c\">" + answer_c[i] + "</span><br />";
+        str += '<div>';
+        str += '<input class="rc-radio" type="radio" value="c" name="ans" id="ans" onclick="checkAnswer(\'c\', \'' + correct_answer[i] + '\');" />';
+        str += '<div class="rc-letter">C.</div><div id="a_c" class="rc-answer-text">' + answer_c[i] + '</div>';
+        str += '</div>';
 
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"d\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('d', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;D)&nbsp; <span id=\"a_d\">" + answer_d[i] + "</span><br />";
-
-        str += '<br />';
-
-    document.getElementById('fishquiz').innerHTML = str;
-    document.getElementById('fishquiz_answers').innerHTML = score;
-
-    index++;
-}
-
-function runQuiz2() {
-    total_questions = image.length;
-    if(index >= total_questions) {
-        right_answers = 0; 
-        index = 0; 
-    }
-
-    var score = "<table width=\"100%\" border=\"0\"><tr style=\"height: 28px;\">";
-        score += "<td>&nbsp;</td><td align=\"right\">" + right_answers + " correct of " + total_questions + "</td>";
-        score += "</tr></table>";
-
-    var i = index;
-
-    var str = "<form action=\"#\" method=\"post\" id=\"myform\" name=\"myform\">";
-        str += "<center>";
-        str += "<img src=\"" + image[i] + "\" width=\"300\" height=\"225\" border=\"1\" />";
-        str += "</center><br />";
-        str += "<font style=\"color: #000000; font-family: Arial, Tahoma, Verdana; font-size: 14px;\">";
-        str += "<b>" + (index +1) + ".</b>&nbsp;&nbsp;" + question[i] + "<br /><br />";
-
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"a\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('a', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;A)&nbsp; <span id=\"a_a\">" + answer_a[i] + "</span><br />";
-
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"b\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('b', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;B)&nbsp; <span id=\"a_b\">" + answer_b[i] + "</span><br />";
-
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"c\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('c', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;C)&nbsp; <span id=\"a_c\">" + answer_c[i] + "</span><br />";
-
-        str += "<input class=\"rc_radio\" type=\"radio\" value=\"d\" name=\"ans\" id=\"ans\" onclick=\"checkAnswer('d', '" + correct_answer[i] + "');\" />";
-        str += "&nbsp;D)&nbsp; <span id=\"a_d\">" + answer_d[i] + "</span><br />";
-
-        str += "</font><br />";
-        str += "</form>";
+        str += '<div>';
+        str += '<input class="rc-radio" type="radio" value="d" name="ans" id="ans" onclick="checkAnswer(\'d\', \'' + correct_answer[i] + '\');" />';
+        str += '<div class="rc-letter">D.</div><div id="a_d" class="rc-answer-text">' + answer_d[i] + '</div>';
+        str += '</div>';
 
     document.getElementById('fishquiz').innerHTML = str;
-    document.getElementById('fishquiz_answers').innerHTML = score;
+    document.getElementById('rc-quiz-answers').innerHTML = score;
 
     index++;
 }
 
 function checkAnswer(user_answer, the_answer) {
-  //var form = document.getElementById('myform');
-    var str = '<table width="100%" border="0"><tr style="height: 28px;">';
+    var str = '<table width="100%" id="rc-answer-table"><tr>';
     if(user_answer.toLowerCase() == the_answer.toLowerCase()) {
         // Correct answer
         // --------------
         right_answers++;
         str += '<td align="left">';
-        str += '<font style="color: #008000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;">';
         str += 'Correct!&nbsp;&nbsp;&nbsp;&nbsp;';
-        if(index >= total_questions) { str += '<input class="rc_input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
-        else                         { str += '<input class="rc_input" type="submit" value="Next" onclick="runQuiz();" />'; }
-        str += '</font></td>';
+        if(index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
+        else                         { str += '<input class="rc-input" type="submit" value="Next" onclick="runQuiz();" />'; }
+        str += '</td>';
         str += '<td align="right">' + right_answers + ' correct of ' + total_questions + '</td></tr></table>';
-        document.getElementById('fishquiz_answers').innerHTML = str;
+        document.getElementById('rc-quiz-answers').innerHTML = str;
+
+        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').className = 'rc-answer-correct'; }
     }
     else {
         // Wrong answer
         // ------------
         str += '<td align="left">';
-        str += '<font style="color: #cd0000; font-family: Comic Sans MS, Arial, Tahoma; font-size: 18px;">';
         str += 'Wrong&nbsp;&nbsp;&nbsp;&nbsp;';
-        if(index >= total_questions) { str += '<input class="rc_input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
-        else                         { str += '<input class="rc_input" type="submit" value="Next" onclick="runQuiz();" />'; }
-        str += '</font></td>';
+        if(index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
+        else                         { str += '<input class="rc-input" type="submit" value="Next" onclick="runQuiz();" />'; }
+        str += '</td>';
         str += "<td align=\"right\">" + right_answers + " correct of " + total_questions + "</td></tr></table>";
-        document.getElementById('fishquiz_answers').innerHTML = str;
+        document.getElementById('rc-quiz-answers').innerHTML = str;
 
-        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').style.backgroundColor = "#00ff00"; }
-        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').style.backgroundColor = "#00ff00"; }
-        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').style.backgroundColor = "#00ff00"; }
-        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').style.backgroundColor = "#00ff00"; }
+        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').className = 'rc-answer-wrong'; }
     }
 
-    var answer = document.getElementsByClassName('rc_radio');
+    var answer = document.getElementsByClassName('rc-radio');
     if(answer) {
         answer[0].disabled = true;
         answer[1].disabled = true;
@@ -233,7 +196,7 @@ function checkAnswer(user_answer, the_answer) {
           <div class="large-12 columns">
             <h4>Reef Creature &amp; Fish ID Quiz</h4>
             <div id="fishquiz"></div>
-            <div id="fishquiz_answers"></div>
+            <div id="rc-quiz-answers"></div>
           </div>
         </div>
       </div>
