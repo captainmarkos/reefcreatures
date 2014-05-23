@@ -153,8 +153,8 @@ function checkAnswer(user_answer, the_answer) {
 <link type="text/css" rel="stylesheet" type="text/css" href="reefcreatures.css" />
 <link type="text/css" rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css" />
 <link type="text/css" href="http://fonts.googleapis.com/css?family=Raleway:700,500,400,300,200" rel="stylesheet" />
-<link type="text/css" rel="stylesheet" href="../styles/bluewild.css" />
 <link rel="stylesheet" href="../styles/foundation.css" />
+<link type="text/css" rel="stylesheet" href="../styles/bluewild.css" />
 <link type="text/css" rel="stylesheet" href="../styles/normalize.css" />
 
 <script type="text/javascript">
@@ -172,19 +172,24 @@ function checkAnswer(user_answer, the_answer) {
       </div>
       <div class="small-12 medium-6 large-6 columns contact-info small-only-text-center">
          <a href="tel:19542135067"><i class="fa fa-phone"></i> : (954) 213-5067</a>&nbsp;&nbsp;
+         <br class="show-for-small-only" />
+         <br class="show-for-small-only" />
          <a href="mailto:bluewildscuba@gmail.com" target="_blank">
          <i class="fa fa-envelope"></i> : bluewildscuba@gmail.com</a>
       </div>
    </div>
 </header>
+
 <div class="row">
-   <nav class="breadcrumbs">
-      <a href="../"><i class="fa fa-home icon-font-size"></i></a>
-      <a href="../#/courses">Scuba Courses</a>
-      <a href="../#/aboutus">About Us</a>
-      <a class="hide-for-small-only"  href="../divelog/index.php">Dive Log</a>
-      <a class="selected">Reef Creature Quiz</a>
-   </nav>
+  <div class="large-12 column nav">
+    <ul class="inline-list">
+    <li class="no-margin-left"><a href="../"><i class="fa fa-home icon-font-size"></i></a></li>
+    <li><a href="../#/courses">Scuba Courses</a></li>
+    <li><a href="../#/aboutus">About Us</a></li>
+    <li><a href="../divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
+    <li><a class="selected">Reef Creature Quiz</a></li>
+    </ul>
+  </div>
 </div>
 
 <div class="row panel-margin">
