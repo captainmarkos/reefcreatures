@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Reef Creature Quiz" />
 <meta name="keywords" content="free creatures quiz" />
@@ -130,7 +131,7 @@ function checkAnswer(user_answer, the_answer) {
         if(index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
         else                         { str += '<input class="rc-input" type="submit" value="Next" onclick="runQuiz();" />'; }
         str += '</td>';
-        str += "<td align=\"right\">" + right_answers + " correct of " + total_questions + "</td></tr></table>";
+        str += '<td align="right">' + right_answers + ' correct of ' + total_questions + '</td></tr></table>';
         document.getElementById('rc-quiz-answers').innerHTML = str;
 
         if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').className = 'rc-answer-wrong'; }
@@ -150,10 +151,10 @@ function checkAnswer(user_answer, the_answer) {
 
 </script>
 
-<link type="text/css" rel="stylesheet" type="text/css" href="reefcreatures.css" />
+<link type="text/css" rel="stylesheet" href="reefcreatures.css" />
 <link type="text/css" rel="stylesheet" href="../vendor/font-awesome-4.1.0/css/font-awesome.min.css" />
-<link type="text/css" href="http://fonts.googleapis.com/css?family=Raleway:700,500,400,300,200" rel="stylesheet" />
-<link rel="stylesheet" href="../styles/foundation.css" />
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:400" />
+<link type="text/css" rel="stylesheet" href="../styles/foundation.css" />
 <link type="text/css" rel="stylesheet" href="../styles/bluewild.css" />
 <link type="text/css" rel="stylesheet" href="../styles/normalize.css" />
 
@@ -180,35 +181,36 @@ function checkAnswer(user_answer, the_answer) {
    </div>
 </header>
 
+<!-- navbar -->
 <div class="row">
-  <div class="large-12 column nav">
-    <ul class="inline-list">
-    <li class="no-margin-left"><a href="../"><i class="fa fa-home icon-font-size"></i></a></li>
-    <li><a href="../#/courses">Scuba Courses</a></li>
-    <li><a href="../#/aboutus">About Us</a></li>
-    <li><a href="../divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
-    <li><a class="selected">Reef Creature Quiz</a></li>
-    </ul>
-  </div>
+    <div class="large-12 column nav">
+        <ul class="inline-list">
+          <li class="no-margin-left"><a href="../"><i class="fa fa-home icon-font-size"></i></a></li>
+          <li><a href="../#/courses">Scuba Courses</a></li>
+          <li><a href="../#/aboutus">About Us</a></li>
+          <li><a href="../divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
+          <li><a class="selected">Reef Creature Quiz</a></li>
+        </ul>
+    </div>
 </div>
 
 <div class="row panel-margin">
-  <div class="large-12 columns no-padding">
-    <div class="panel">
-      <!--single row for info-->
-      <div class="panel">
-        <div class="row">
-          <div class="large-12 columns">
-            <h4>Reef Creature &amp; Fish ID Quiz</h4>
-            <div id="fishquiz"></div>
-            <div id="rc-quiz-answers"></div>
-          </div>
+    <div class="large-12 columns no-padding">
+        <div class="panel">
+            <!--single row for info-->
+            <div class="panel">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h4>Reef Creature &amp; Fish ID Quiz</h4>
+                        <div id="fishquiz"></div>
+                        <div id="rc-quiz-answers"></div>
+                    </div>
+                </div>
+            </div>
+            <!--end content-->
         </div>
-      </div>
-      <!--end content-->
     </div>
-  </div>
 </div>
-</div>
+
 </body>
 </html>
