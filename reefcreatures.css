@@ -60,3 +60,13 @@
     border: 0px solid #ffffff;
     vertical-align: 1px;
 }
+
+#ans_A, #ans_B, #ans_C, #ans_D {
+    cursor: pointer;
+    margin-bottom: 20px;
+    height: 28px;
+}
+
+#ans_A:hover, #ans_B:hover, #ans_C:hover, #ans_D:hover {
+    color: #ffff00;
+}

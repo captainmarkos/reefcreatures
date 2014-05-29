@@ -59,52 +59,71 @@
 ?>
 
 <script type="text/javascript">
-var index = 0;
+var question_index = 0;
 var right_answers = 0;
 var total_questions = 0;
 
 function runQuiz() {
     total_questions = image.length;
-    if(index >= total_questions) {
+    if(question_index >= total_questions) {
         right_answers = 0; 
-        index = 0; 
+        question_index = 0; 
     }
 
     var score  = '<div id="main-rc-score">';
         score += '<div id="correct-rc-score">' + right_answers + ' correct of '+ total_questions + '</div>';
 
-    var i = index;
+    var i = question_index;
 
     var str  = '<img id="rc-img" src="' + image[i] + '" />';
-        str += '<b>' + (index +1) + '.</b>&nbsp;&nbsp;' + question[i] + '<br /><br />';
+        str += '<b>' + (question_index +1) + '.</b>&nbsp;&nbsp;' + question[i] + '<br /><br />';
 
-        str += '<div>';
-        str += '<input class="rc-radio" type="radio" value="a" name="ans" id="ans" onclick="checkAnswer(\'a\', \'' + correct_answer[i] + '\');" />';
+        str += '<div id="ans_A">';
+        str += '<input class="rc-radio" type="radio" value="a" name="ans" id="rc-radio-ans-a" ';
+        str += '    onclick="checkAnswer(\'a\', \'' + correct_answer[i] + '\');" />';
         str += '<div class="rc-letter">A.</div><div id="a_a" class="rc-answer-text">' + answer_a[i] + '</div>';
         str += '</div>';
 
-        str += '<div>';
-        str += '<input class="rc-radio" type="radio" value="b" name="ans" id="ans" onclick="checkAnswer(\'b\', \'' + correct_answer[i] + '\');" />';
+        str += '<div id="ans_B">';
+        str += '<input class="rc-radio" type="radio" value="b" name="ans" id="rc-radio-ans-b" ';
+        str += '    onclick="checkAnswer(\'b\', \'' + correct_answer[i] + '\');" />';
         str += '<div class="rc-letter">B.</div><div id="a_b" class="rc-answer-text">' + answer_b[i] + '</div>';
         str += '</div>';
 
-        str += '<div>';
-        str += '<input class="rc-radio" type="radio" value="c" name="ans" id="ans" onclick="checkAnswer(\'c\', \'' + correct_answer[i] + '\');" />';
+        str += '<div id="ans_C">';
+        str += '<input class="rc-radio" type="radio" value="c" name="ans" id="rc-radio-ans-c" ';
+        str += '    onclick="checkAnswer(\'c\', \'' + correct_answer[i] + '\');" />';
         str += '<div class="rc-letter">C.</div><div id="a_c" class="rc-answer-text">' + answer_c[i] + '</div>';
         str += '</div>';
 
-        str += '<div>';
-        str += '<input class="rc-radio" type="radio" value="d" name="ans" id="ans" onclick="checkAnswer(\'d\', \'' + correct_answer[i] + '\');" />';
+        str += '<div id="ans_D">';
+        str += '<input class="rc-radio" type="radio" value="d" name="ans" id="rc-radio-ans-d" ';
+        str += '    onclick="checkAnswer(\'d\', \'' + correct_answer[i] + '\');" />';
         str += '<div class="rc-letter">D.</div><div id="a_d" class="rc-answer-text">' + answer_d[i] + '</div>';
         str += '</div>';
 
     document.getElementById('fishquiz').innerHTML = str;
+
+    var ans_A = document.getElementById('ans_A');
+    var ans_B = document.getElementById('ans_B');
+    var ans_C = document.getElementById('ans_C');
+    var ans_D = document.getElementById('ans_D');
+    if(ans_A) ans_A.onclick = function() { checkAnswer('a', correct_answer[i]); };
+    if(ans_B) ans_B.onclick = function() { checkAnswer('b', correct_answer[i]); };
+    if(ans_C) ans_C.onclick = function() { checkAnswer('c', correct_answer[i]); };
+    if(ans_D) ans_D.onclick = function() { checkAnswer('d', correct_answer[i]); };
+
     document.getElementById('rc-quiz-answers').innerHTML = score;
 
-    index++;
+    question_index++;
 }
 
 function checkAnswer(user_answer, the_answer) {
+    var ans_A = document.getElementById('rc-radio-ans-a');
+    var ans_B = document.getElementById('rc-radio-ans-b');
+    var ans_C = document.getElementById('rc-radio-ans-c');
+    var ans_D = document.getElementById('rc-radio-ans-d');
+
     var str = '<table width="100%" id="rc-answer-table"><tr>';
     if(user_answer.toLowerCase() == the_answer.toLowerCase()) {
         // Correct answer
@@ -112,43 +131,57 @@ function checkAnswer(user_answer, the_answer) {
         right_answers++;
         str += '<td align="left">';
         str += 'Correct!&nbsp;&nbsp;&nbsp;&nbsp;';
-        if(index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
+        if(question_index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
         else                         { str += '<input class="rc-input" type="submit" value="Next" onclick="runQuiz();" />'; }
         str += '</td>';
         str += '<td align="right">' + right_answers + ' correct of ' + total_questions + '</td></tr></table>';
         document.getElementById('rc-quiz-answers').innerHTML = str;
 
-        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').className = 'rc-answer-correct'; }
-        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').className = 'rc-answer-correct'; }
-        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').className = 'rc-answer-correct'; }
-        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'a') { ans_A.checked = true; document.getElementById('a_a').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'b') { ans_B.checked = true; document.getElementById('a_b').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'c') { ans_C.checked = true; document.getElementById('a_c').className = 'rc-answer-correct'; }
+        if(the_answer.toLowerCase() == 'd') { ans_D.checked = true; document.getElementById('a_d').className = 'rc-answer-correct'; }
     }
     else {
         // Wrong answer
         // ------------
         str += '<td align="left">';
         str += 'Wrong&nbsp;&nbsp;&nbsp;&nbsp;';
-        if(index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
+        if(question_index >= total_questions) { str += '<input class="rc-input" type="submit" value="Start Over" onclick="window.location.reload();" />'; }
         else                         { str += '<input class="rc-input" type="submit" value="Next" onclick="runQuiz();" />'; }
         str += '</td>';
         str += '<td align="right">' + right_answers + ' correct of ' + total_questions + '</td></tr></table>';
         document.getElementById('rc-quiz-answers').innerHTML = str;
 
-        if(the_answer.toLowerCase() == 'a') { document.getElementById('a_a').className = 'rc-answer-wrong'; }
-        if(the_answer.toLowerCase() == 'b') { document.getElementById('a_b').className = 'rc-answer-wrong'; }
-        if(the_answer.toLowerCase() == 'c') { document.getElementById('a_c').className = 'rc-answer-wrong'; }
-        if(the_answer.toLowerCase() == 'd') { document.getElementById('a_d').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'a') { ans_A.checked = true; document.getElementById('a_a').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'b') { ans_B.checked = true; document.getElementById('a_b').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'c') { ans_C.checked = true; document.getElementById('a_c').className = 'rc-answer-wrong'; }
+        if(the_answer.toLowerCase() == 'd') { ans_D.checked = true; document.getElementById('a_d').className = 'rc-answer-wrong'; }
     }
 
     var answer = document.getElementsByClassName('rc-radio');
     if(answer) {
-        answer[0].disabled = true;
-        answer[1].disabled = true;
-        answer[2].disabled = true;
-        answer[3].disabled = true;
+        answers_not_clickable();
     }
 }
 
+function answers_not_clickable() {
+    try {
+        document.getElementById('ans_A').style.cursor = 'default';
+        document.getElementById('ans_B').style.cursor = 'default';
+        document.getElementById('ans_C').style.cursor = 'default';
+        document.getElementById('ans_D').style.cursor = 'default';
+
+        // Need to clear the onclick handlers.
+        document.getElementById('ans_A').onclick = function() { console.log('--> ans_A'); return true; };
+        document.getElementById('ans_B').onclick = function() { console.log('--> ans_B'); return true; };
+        document.getElementById('ans_C').onclick = function() { console.log('--> ans_C'); return true; };
+        document.getElementById('ans_D').onclick = function() { console.log('--> ans_D'); return true; };
+    } catch(e) {
+        console.log('--> Exception caught:');
+        console.log(e);
+    }
+}
 </script>
 
 <link type="text/css" rel="stylesheet" href="reefcreatures.css" />
