@@ -196,7 +196,7 @@ function answers_not_clickable() {
     var email = '<?php echo $email; ?>';
 
 </script>
-<title>Blue Wild - Reef Creature Quiz</title>
+<title>blue wild scuba: reef creature quiz</title>
 </head>
 <body onload="runQuiz();">
 
