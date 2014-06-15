@@ -9,9 +9,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Reef Creature Quiz" />
-<meta name="keywords" content="free creatures quiz" />
-<title>Blue Wild - Reef Creature Quiz</title>
+<meta name="description" content="Reef Creature Quiz - See how well you know your fish and other reef creatures in the Atlantic / Caribbean area." />
+<meta name="keywords" content="free atlantic caribbean reef creatures quiz" />
+<meta name="author" content="Captain Markos" />
 
 <?php
     // NOTE: Here we read in the CSV data file and shuffle the fish quiz records.
@@ -196,6 +196,7 @@ function answers_not_clickable() {
     var email = '<?php echo $email; ?>';
 
 </script>
+<title>Blue Wild - Reef Creature Quiz</title>
 </head>
 <body onload="runQuiz();">
 
@@ -218,11 +219,11 @@ function answers_not_clickable() {
 <div class="row">
     <div class="large-12 column nav">
         <ul class="inline-list">
-          <li class="no-margin-left"><a href="../"><i class="fa fa-home icon-font-size"></i></a></li>
-          <li><a href="../#!/courses">Scuba Courses</a></li>
-          <li><a href="../#!/aboutus">About Us</a></li>
-          <li><a href="../divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
-          <li><a class="selected">Reef Creature Quiz</a></li>
+          <li class="no-margin-left"><a href="/"><i class="fa fa-home icon-font-size"></i></a></li>
+          <li><a href="/courses">Scuba Courses</a></li>
+          <li><a href="/aboutus">About Us</a></li>
+          <li><a href="/divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
+          <li><a href="/reefcreatures/index.php">Reef Creature Quiz</a></li>
         </ul>
     </div>
 </div>
