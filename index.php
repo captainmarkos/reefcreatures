@@ -196,15 +196,17 @@ function answers_not_clickable() {
     var email = '<?php echo $email; ?>';
 
 </script>
-<title>blue wild scuba: reef creature quiz</title>
+<title>Blue Wild Scuba: Reef Creature Quiz</title>
 </head>
 <body onload="runQuiz();">
 
 <header>
    <div class="row offset-top">
+
       <div class="small-12 medium-6 large-6 columns no-padding small-only-text-center">
-         <h3>dive the blue wild</h3>
+          <div class="logo-style">Blue Wild</br>Scuba</div>
       </div>
+
       <div class="small-12 medium-6 large-6 columns contact-info small-only-text-center">
          <a href="tel:19542135067"><i class="fa fa-phone"></i> : (954) 213-5067</a>&nbsp;&nbsp;
          <br class="show-for-small-only" />
@@ -219,11 +221,11 @@ function answers_not_clickable() {
 <div class="row">
     <div class="large-12 column nav">
         <ul class="inline-list">
-          <li class="no-margin-left"><a href="/"><i class="fa fa-home icon-font-size"></i></a></li>
-          <li><a href="/courses.html">Scuba Courses</a></li>
+          <li class="no-margin-left"><a href="/index.html"><i class="fa fa-home icon-font-size"></i></a></li>
           <li><a href="/aboutus.html">About Us</a></li>
-          <li><a href="/divelog/index.php" class="hide-for-small-only">Dive Log</a></li>
-          <li><a href="/reefcreatures/index.php">Reef Creature Quiz</a></li>
+          <li><a href="/charters.html">Charters</a></li>
+          <li><a href="/dive_schedule.html">Dive Schedule</a></li>
+          <li><a class="active" href="/reefcreatures/index.php" target="_self">Reef Creature Quiz</a></li>
         </ul>
     </div>
 </div>
