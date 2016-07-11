@@ -209,7 +209,7 @@ function answers_not_clickable() {
       </div>
 
       <div class="small-12 medium-6 large-6 columns contact-info small-only-text-center">
-         <a href="tel:19542135067"><i class="fa fa-phone"></i> : (954) 213-5067</a>&nbsp;&nbsp;
+         <a href="tel:9543726163"><i class="fa fa-phone"></i> : (954) 372-6163</a>&nbsp;&nbsp;
          <br class="show-for-small-only" />
          <br class="show-for-small-only" />
          <a href="mailto:bluewildscuba@gmail.com" target="_blank">
