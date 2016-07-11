@@ -9,8 +9,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Reef Creature Quiz - See how well you know your fish and other reef creatures in the Atlantic / Caribbean area." />
-<meta name="keywords" content="free atlantic caribbean reef creatures quiz" />
+<meta name="description" content="Blue Wild Scuba - Reef Creature Quiz See how well you know your fish and other reef creatures in the Atlantic / Caribbean area." />
+<meta name="keywords" content="free atlantic caribbean reef creatures quiz, scuba diving, snorkeling, freediving" />
 <meta name="author" content="Captain Markos" />
 
 <?php
@@ -204,7 +204,8 @@ function answers_not_clickable() {
    <div class="row offset-top">
 
       <div class="small-12 medium-6 large-6 columns no-padding small-only-text-center">
-          <div class="logo-style">Blue Wild</br>Scuba</div>
+          <!-- <div class="logo-style">Blue Wild</br>Scuba</div> -->
+            <img id="logo-image" src="/images/bluewildscuba_logo_transparent.png" alt="Blue Wild Scuba" />
       </div>
 
       <div class="small-12 medium-6 large-6 columns contact-info small-only-text-center">
